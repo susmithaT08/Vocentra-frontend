@@ -43,7 +43,7 @@ export default function LoginPage() {
             // Save token to both localStorage and cookie
             if (typeof window !== 'undefined') {
                 localStorage.setItem('vocentra_token', data.token);
-                document.cookie = `vocentra_token=${data.token}; path=/; max-age=${30 * 24 * 60 * 60}; SameSite=Lax`;
+                document.cookie = `vocentra_token=${data.token}; path=/; max-age=${30 * 24 * 60 * 60}; SameSite=None; Secure`;
             }
 
             // Route based on onboarding status
