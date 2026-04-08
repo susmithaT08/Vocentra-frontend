@@ -13,6 +13,11 @@ type ProgressData = {
 };
 
 export default function DashboardPage() {
+    const handleLogout = () => {
+        localStorage.removeItem('vocentra_token');
+        document.cookie = "vocentra_token=; path=/; max-age=0";
+        window.location.href = '/login';
+    };
     const { metrics, initProgress, analyzePerformance, isAnalyzing, insights, suggestions } = useProgressStore();
 
     useEffect(() => {
@@ -21,6 +26,14 @@ export default function DashboardPage() {
 
     return (
         <div className="view-content animate-slide-up">
+            <div className="flex justify-end mb-6">
+                <button
+                    onClick={handleLogout}
+                    className="px-5 py-2 bg-gradient-to-r from-red-500 to-rose-500 hover:from-red-600 hover:to-rose-600 text-white rounded-xl shadow-md transition-all"
+                >
+                    Logout
+                </button>
+            </div>
             {/* Welcome Header */}
             <div className="mb-8">
                 <h2 className="font-display text-3xl lg:text-4xl font-semibold text-white mb-2">Welcome back, Explorer</h2>
@@ -59,7 +72,7 @@ export default function DashboardPage() {
                 <div className="glass-card rounded-2xl p-6 flex flex-col">
                     <div className="flex justify-between items-center mb-6">
                         <h3 className="text-white font-semibold">AI Insights</h3>
-                        <button 
+                        <button
                             onClick={() => analyzePerformance()}
                             disabled={isAnalyzing}
                             className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-all ${isAnalyzing ? 'bg-white/5 text-white/40 cursor-not-allowed' : 'bg-violet-500/20 text-violet-300 hover:bg-violet-500/30'}`}
@@ -67,7 +80,7 @@ export default function DashboardPage() {
                             {isAnalyzing ? 'Analyzing...' : 'Refresh'}
                         </button>
                     </div>
-                    
+
                     <div className="space-y-4 flex-grow overflow-y-auto max-h-64 pr-2 custom-scrollbar">
                         {insights.length > 0 ? (
                             <>

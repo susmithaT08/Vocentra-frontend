@@ -57,7 +57,7 @@ export default function RegisterPage() {
             if (!res.ok) throw new Error(data.message || 'Registration failed');
 
             // Redirect to OTP verification
-            router.push(`/verify?userId=${data.userId}`);
+            router.push(`/login `);
         } catch (err: any) {
             setError(err.message);
         } finally {

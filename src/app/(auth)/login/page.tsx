@@ -34,11 +34,8 @@ export default function LoginPage() {
 
             if (!res.ok) throw new Error(data.message || 'Login failed');
 
-            if (data.requireVerification) {
-                // Redirect to OTP verification
-                router.push(`/verify?userId=${data.userId}`);
-                return;
-            }
+
+
 
             // Save token to both localStorage and cookie
             if (typeof window !== 'undefined') {
