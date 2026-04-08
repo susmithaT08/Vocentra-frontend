@@ -13,20 +13,20 @@ export const submitAudioForAnalysis = async (
     durationSeconds: number
 ): Promise<ConfidenceAnalysisResponse> => {
     try {
-        const response = await fetch('/api/analyze-confidence', {
+        const response = await fetch('https://vocentra-backend.onrender.com/api/analyze-confidence', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ text, durationSeconds })
         });
-        
+
         if (!response.ok) {
             throw new Error(`Server responded with status ${response.status}`);
         }
-        
+
         const data = await response.json();
-        
+
         // Ensure structured response even if backend unexpectedly mutated
         return {
             score: data?.score || 65,
